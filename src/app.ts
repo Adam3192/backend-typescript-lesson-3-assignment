@@ -1,5 +1,5 @@
 import express, { NextFunction, Request, Response } from 'express';
-// import messageRoutes from './routes/messages'
+import mathRoutes from './routes/math'
 import routes from './routes/index';
 import path from 'path'
 
@@ -9,10 +9,10 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.use('/', routes);
-// app.use('/messages', messageRoutes);
+app.use('/math', mathRoutes);
 
-// app.use((req: Request, res: Response, next: NextFunction) => {
-//  res.sendFile(path.join(__dirname, 'views', 'not-found.html'))
-// })
+app.use((req: Request, res: Response, next: NextFunction) => {
+ res.status(404).sendFile(path.join(__dirname, 'views', 'not-found.html'))
+})
 
 app.listen(3000);
